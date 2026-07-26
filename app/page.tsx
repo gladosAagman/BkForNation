@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowRight, Sprout, HeartHandshake, Leaf, TreePine, Users, Globe2, TrendingUp, ChevronRight } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { Counter } from "@/components/site/Counter";
-import { brand, impactStats, campaigns, whyTrees, donationTiers, testimonials, blogs, galleryImages, media } from "@/data/site";
+import { brand, impactStats, campaigns, whyTrees, donationTiers, testimonials, galleryImages, media } from "@/data/site";
 
 export default function Home() {
   return (
@@ -250,37 +250,6 @@ export default function Home() {
                 <div className="absolute inset-0 magnetic" style={{ background: `linear-gradient(135deg, oklch(0.55 0.13 ${img.hue}), oklch(0.35 0.08 ${img.hue}))` }} />
                 <div className="absolute inset-0 opacity-40" style={{ backgroundImage: `radial-gradient(circle at 30% 30%, oklch(0.85 0.15 ${img.hue} / 0.6), transparent 50%)` }} />
                 <Leaf className="absolute bottom-3 right-3 h-8 w-8 text-white/60 group-hover:scale-125 transition-transform duration-500" />
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-24 md:py-32">
-        <div className="container-nice">
-          <Reveal className="flex items-end justify-between flex-wrap gap-4 mb-12">
-            <div>
-              <div className="text-xs uppercase tracking-widest text-emerald font-semibold">Journal</div>
-              <h2 className="mt-3 font-display text-4xl md:text-5xl font-bold tracking-tight text-forest">Field notes & essays.</h2>
-            </div>
-            <Link href="/blogs" className="text-forest font-semibold hover:gap-3 inline-flex items-center gap-1.5 transition-all">
-              All posts <ArrowRight className="h-4 w-4" />
-            </Link>
-          </Reveal>
-          <div className="grid md:grid-cols-3 gap-6">
-            {blogs.slice(0, 3).map((b, i) => (
-              <Reveal key={b.slug} delay={i * 100}>
-                <article className="h-full rounded-3xl bg-card border border-border overflow-hidden magnetic flex flex-col">
-                  <div className="h-40 bg-leaf-gradient relative">
-                    <div className="absolute top-4 left-4 rounded-full bg-forest/80 text-white px-3 py-1 text-xs font-semibold">{b.category}</div>
-                  </div>
-                  <div className="p-6 flex-1 flex flex-col">
-                    <div className="text-xs text-muted-foreground">{new Date(b.date).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" })} · {b.read} min read</div>
-                    <h3 className="mt-2 font-display text-xl font-bold text-forest leading-snug">{b.title}</h3>
-                    <p className="mt-2 text-sm text-muted-foreground flex-1">{b.excerpt}</p>
-                    <div className="mt-4 text-sm font-semibold text-forest inline-flex items-center gap-1.5">Read essay <ArrowRight className="h-4 w-4" /></div>
-                  </div>
-                </article>
               </Reveal>
             ))}
           </div>

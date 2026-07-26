@@ -5,7 +5,6 @@ import { Reveal } from "@/components/site/Reveal";
 import { donationTiers } from "@/data/site";
 import { HeartHandshake, ShieldCheck, ReceiptText, TreePine } from "lucide-react";
 
-
 export default function DonateClient() {
   const [amount, setAmount] = useState<number>(500);
   const [custom, setCustom] = useState("");
@@ -16,12 +15,14 @@ export default function DonateClient() {
         eyebrow="Donate"
         title="Turn a tab into a tree."
         subtitle="80G tax-deductible. Geo-tagged plot per donation. Photo & GPS certificate emailed within 48 hours."
+        backgroundImage="/images/campaign-himalaya.jpg"
       />
-      <section className="pb-24">
+      {/* Same -mt-8 overlap rhythm as Home / Drives / Impact / Gallery / Contact. */}
+      <section className="relative -mt-8 z-10 pb-24">
         <div className="container-nice grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-6">
             <Reveal>
-              <div className="rounded-3xl bg-card border border-border p-8 shadow-soft">
+              <div className="rounded-3xl bg-card border border-border p-8 shadow-glow">
                 <h2 className="font-display text-2xl font-bold text-forest">Choose an amount</h2>
                 <div className="mt-5 grid grid-cols-2 md:grid-cols-4 gap-3">
                   {donationTiers.map((d) => (
@@ -62,7 +63,7 @@ export default function DonateClient() {
             </Reveal>
 
             <Reveal delay={100}>
-              <form onSubmit={(e) => e.preventDefault()} className="rounded-3xl bg-card border border-border p-8 shadow-soft">
+              <form onSubmit={(e) => e.preventDefault()} className="rounded-3xl bg-card border border-border p-8 shadow-glow">
                 <h2 className="font-display text-2xl font-bold text-forest">Your details</h2>
                 <div className="mt-5 grid md:grid-cols-2 gap-4">
                   {[
@@ -91,7 +92,7 @@ export default function DonateClient() {
               { Icon: TreePine, k: "Geo-tagged", v: "Every donation ties to a real, monitored plot." },
             ].map((b, i) => (
               <Reveal key={b.k} delay={i * 80}>
-                <div className="rounded-2xl bg-card border border-border p-6">
+                <div className="rounded-2xl bg-card border border-border p-6 shadow-soft">
                   <div className="h-10 w-10 rounded-xl bg-leaf-gradient grid place-items-center text-forest">
                     <b.Icon className="h-5 w-5" />
                   </div>
