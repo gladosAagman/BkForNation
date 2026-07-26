@@ -1,7 +1,7 @@
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
 import { ImpactChart } from "@/components/site/ImpactChart";
-import { impactStats, formatCompactIN } from "@/data/site";
+import { impactStats } from "@/data/site";
 import { TreePine, Users, MapPin, Wind, HeartHandshake, type LucideIcon } from "lucide-react";
 
 import type { Metadata } from "next";
@@ -19,6 +19,16 @@ const statIcons: Record<string, LucideIcon> = {
   "Partner NGOs": HeartHandshake,
 };
 
+// Noticeably smaller ceiling than before across every tier — long
+// 6-7 digit numbers stay compact and readable instead of dominating
+// their column.
+function sizeClass(len: number) {
+  if (len >= 11) return "text-base sm:text-lg md:text-xl lg:text-2xl";
+  if (len >= 9) return "text-lg sm:text-xl md:text-xl lg:text-2xl";
+  if (len >= 7) return "text-xl sm:text-xl md:text-2xl lg:text-3xl";
+  return "text-2xl md:text-3xl lg:text-3xl";
+}
+
 export default function Impact() {
   return (
     <>
@@ -29,28 +39,26 @@ export default function Impact() {
         backgroundImage="/images/campaign-mangrove.jpg"
       />
 
-      {/* Overlaps the hero's bottom edge, same -mt-8 + shadow-glow treatment
-          as the homepage stats bar. */}
       <section className="relative -mt-8 z-10">
         <div className="container-nice">
-          <Reveal className="rounded-3xl bg-card shadow-glow border border-border/60 p-6 md:p-10">
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-8">
+          <Reveal className="rounded-3xl bg-card shadow-glow border border-border/60 p-6 md:p-8">
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-5 md:gap-6">
               {impactStats.map((s) => {
                 const Icon = statIcons[s.label];
+                const formatted = `${s.value.toLocaleString("en-IN")}${s.suffix}`;
                 return (
-                  <div key={s.label} className="text-center md:text-left border-l-0 md:border-l md:first:border-l-0 md:pl-6 md:first:pl-0 border-border/60">
+                  <div key={s.label} className="text-center md:text-left border-l-0 md:border-l md:first:border-l-0 md:pl-5 md:first:pl-0 border-border/60">
                     {Icon && (
-                      <div className="mx-auto md:mx-0 mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-accent/70 text-forest">
-                        <Icon className="h-5 w-5" />
+                      <div className="mx-auto md:mx-0 mb-2.5 flex h-8 w-8 items-center justify-center rounded-full bg-accent/70 text-forest">
+                        <Icon className="h-4 w-4" />
                       </div>
                     )}
                     <div
-                      className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-forest whitespace-nowrap tabular-nums"
-                      title={`Exact: ${s.value.toLocaleString("en-IN")}${s.suffix}`}
+                      className={`font-display font-bold text-forest whitespace-nowrap tabular-nums ${sizeClass(formatted.length)}`}
                     >
-                      {formatCompactIN(s.value)}{s.suffix}
+                      {formatted}
                     </div>
-                    <div className="mt-1.5 text-xs md:text-sm font-medium text-muted-foreground uppercase tracking-wider">{s.label}</div>
+                    <div className="mt-1 text-[11px] md:text-xs font-medium text-muted-foreground uppercase tracking-wider">{s.label}</div>
                   </div>
                 );
               })}
