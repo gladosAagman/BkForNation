@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
@@ -8,7 +8,6 @@ export const metadata: Metadata = {
   title: "BKforNation — Plant. Protect. Inspire.",
   description:
     "BKforNation is a climate-action NGO restoring native forests, coasts, and cities across India. Plant a tree, volunteer, or partner with us.",
-  themeColor: "#146C43",
   icons: { icon: "/favicon.png" },
   openGraph: {
     title: "BKforNation — Plant. Protect. Inspire.",
@@ -18,6 +17,10 @@ export const metadata: Metadata = {
     siteName: "BKforNation",
   },
   twitter: { card: "summary_large_image", site: "@BKforNation" },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#146C43",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

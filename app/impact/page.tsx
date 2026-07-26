@@ -1,7 +1,8 @@
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
-import { Counter } from "@/components/site/Counter";
+import { ImpactChart } from "@/components/site/ImpactChart";
 import { impactStats } from "@/data/site";
+import { TreePine, Users, MapPin, Wind, HeartHandshake, type LucideIcon } from "lucide-react";
 
 import type { Metadata } from "next";
 
@@ -10,13 +11,23 @@ export const metadata: Metadata = {
   description: 'Live impact numbers: trees planted, CO₂ offset, water saved, beneficiaries reached, districts served.',
 };
 
-const bars = [
-  { label: "2022", trees: 145, water: 82, carbon: 40 },
-  { label: "2023", trees: 260, water: 148, carbon: 78 },
-  { label: "2024", trees: 388, water: 210, carbon: 118 },
-  { label: "2025", trees: 512, water: 289, carbon: 165 },
-  { label: "2026", trees: 640, water: 380, carbon: 220 },
-];
+const statIcons: Record<string, LucideIcon> = {
+  "Trees planted": TreePine,
+  "Active volunteers": Users,
+  "Cities reached": MapPin,
+  "CO₂ offset (tons)": Wind,
+  "Partner NGOs": HeartHandshake,
+};
+
+// Noticeably smaller ceiling than before across every tier — long
+// 6-7 digit numbers stay compact and readable instead of dominating
+// their column.
+function sizeClass(len: number) {
+  if (len >= 11) return "text-base sm:text-lg md:text-xl lg:text-2xl";
+  if (len >= 9) return "text-lg sm:text-xl md:text-xl lg:text-2xl";
+  if (len >= 7) return "text-xl sm:text-xl md:text-2xl lg:text-3xl";
+  return "text-2xl md:text-3xl lg:text-3xl";
+}
 
 export default function Impact() {
   return (
@@ -25,19 +36,34 @@ export default function Impact() {
         eyebrow="Impact dashboard"
         title="Numbers you can audit. Forests you can visit."
         subtitle="Every figure below is tied to a geo-tagged plot, verified by an independent ecology partner, and updated quarterly."
+        backgroundImage="/images/campaign-mangrove.jpg"
       />
-      <section className="pb-12">
-        <div className="container-nice grid grid-cols-2 md:grid-cols-5 gap-5">
-          {impactStats.map((s, i) => (
-            <Reveal key={s.label} delay={i * 80}>
-              <div className="rounded-2xl bg-card border border-border p-6 text-center">
-                <div className="font-display text-3xl md:text-4xl font-bold text-forest">
-                  <Counter value={s.value} suffix={s.suffix} />
-                </div>
-                <div className="mt-1 text-xs font-medium uppercase tracking-wider text-muted-foreground">{s.label}</div>
-              </div>
-            </Reveal>
-          ))}
+
+      <section className="relative -mt-8 z-10">
+        <div className="container-nice">
+          <Reveal className="rounded-3xl bg-card shadow-glow border border-border/60 p-6 md:p-8">
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-5 md:gap-6">
+              {impactStats.map((s) => {
+                const Icon = statIcons[s.label];
+                const formatted = `${s.value.toLocaleString("en-IN")}${s.suffix}`;
+                return (
+                  <div key={s.label} className="text-center md:text-left border-l-0 md:border-l md:first:border-l-0 md:pl-5 md:first:pl-0 border-border/60">
+                    {Icon && (
+                      <div className="mx-auto md:mx-0 mb-2.5 flex h-8 w-8 items-center justify-center rounded-full bg-accent/70 text-forest">
+                        <Icon className="h-4 w-4" />
+                      </div>
+                    )}
+                    <div
+                      className={`font-display font-bold text-forest whitespace-nowrap tabular-nums ${sizeClass(formatted.length)}`}
+                    >
+                      {formatted}
+                    </div>
+                    <div className="mt-1 text-[11px] md:text-xs font-medium text-muted-foreground uppercase tracking-wider">{s.label}</div>
+                  </div>
+                );
+              })}
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -48,25 +74,7 @@ export default function Impact() {
             <h2 className="mt-3 font-display text-3xl md:text-4xl font-bold text-forest">Five years of measured climbing.</h2>
           </Reveal>
           <Reveal>
-            <div className="rounded-3xl bg-card border border-border p-6 md:p-10">
-              <div className="grid grid-cols-5 gap-4 md:gap-8 items-end h-72">
-                {bars.map((b) => (
-                  <div key={b.label} className="flex-1 flex flex-col items-center gap-1 h-full justify-end">
-                    <div className="w-full flex items-end gap-1 h-full">
-                      <div className="flex-1 rounded-t-lg bg-forest transition-all" style={{ height: `${(b.trees / 700) * 100}%` }} title={`${b.trees}k trees`} />
-                      <div className="flex-1 rounded-t-lg bg-emerald-brand transition-all" style={{ height: `${(b.water / 400) * 100}%` }} title={`${b.water}M L water`} />
-                      <div className="flex-1 rounded-t-lg bg-leaf transition-all" style={{ height: `${(b.carbon / 250) * 100}%` }} title={`${b.carbon}k tons CO₂`} />
-                    </div>
-                    <div className="text-xs font-semibold text-muted-foreground mt-2">{b.label}</div>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-6 flex flex-wrap gap-5 text-xs text-muted-foreground">
-                <div className="flex items-center gap-2"><span className="h-3 w-3 rounded bg-forest" /> Trees (thousands)</div>
-                <div className="flex items-center gap-2"><span className="h-3 w-3 rounded" style={{ background: "oklch(0.56 0.12 150)" }} /> Water saved (M litres)</div>
-                <div className="flex items-center gap-2"><span className="h-3 w-3 rounded" style={{ background: "oklch(0.78 0.17 130)" }} /> CO₂ offset (thousand tons)</div>
-              </div>
-            </div>
+            <ImpactChart />
           </Reveal>
         </div>
       </section>

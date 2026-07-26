@@ -16,13 +16,20 @@ export const brand = {
   },
 } as const;
 
+export function formatCompactIN(value: number): string {
+  if (value >= 10_000_000) return `${(value / 10_000_000).toFixed(1)}Cr`;
+  if (value >= 100_000) return `${(value / 100_000).toFixed(1)}L`;
+  if (value >= 1_000) return `${(value / 1_000).toFixed(1)}K`;
+  return value.toString();
+}
+
 export const media = {
   hero: "/images/hero-forest.jpg",
-  beforeSlope: "/images/before-slope.jpg",
-  afterForest: "/images/after-forest.jpg",
+  beforeSlope: "/images/almora_before.jpg",
+  afterForest: "/images/almora_after.jpg",
   campaignImages: {
-    "million-mangroves": "/images/campaign-mangrove.jpg",
-    "himalayan-canopy": "/images/campaign-himalaya.jpg",
+    "million-mangroves": "/images/campaign_mangroves.jpg",
+    "himalayan-canopy": "/images/campaign_himalayan.jpg",
     "urban-lungs": "/images/campaign-urban.jpg",
     "river-revive": "/images/campaign-river.jpg",
   } as Record<string, string>,
@@ -36,7 +43,6 @@ export const nav = [
   { to: "/plantation-drives", label: "Drives" },
   { to: "/impact", label: "Impact" },
   { to: "/gallery", label: "Gallery" },
-  { to: "/blogs", label: "Blogs" },
   { to: "/contact", label: "Contact" },
 ] as const;
 
@@ -56,7 +62,6 @@ export const footerNav = [
   { title: "Explore", links: [
     { to: "/gallery", label: "Gallery" },
     { to: "/videos", label: "Videos" },
-    { to: "/blogs", label: "Blogs" },
     { to: "/faq", label: "FAQ" },
   ]},
   { title: "Legal", links: [
@@ -105,10 +110,33 @@ export const testimonials = [
 ];
 
 export const blogs = [
-  { slug: "miyawaki-explained", title: "The Miyawaki method, explained without the jargon", date: "2026-05-12", category: "Science", excerpt: "How a Japanese botanist's density-first approach lets a forest grow 10× faster — and why we use it in Indian cities.", read: 6 },
-  { slug: "why-native-species", title: "Why we refuse to plant eucalyptus, ever", date: "2026-04-02", category: "Field notes", excerpt: "Native species aren't a preference — they're the difference between a plantation and a living forest.", read: 4 },
-  { slug: "csr-that-works", title: "The 3 questions every CSR head should ask before funding a plantation", date: "2026-03-18", category: "Corporate", excerpt: "Survival rate, native ratio, monitoring window. If a partner can't answer these, walk away.", read: 5 },
-  { slug: "monsoon-2025", title: "Monsoon 2025 field report: what 412,000 saplings taught us", date: "2026-02-01", category: "Impact", excerpt: "A candid look at what worked, what died, and how we're adapting for the drier years ahead.", read: 8 },
+  {
+    slug: "miyawaki-method-india",
+    title: "Why the Miyawaki method is India's best bet for urban forests",
+    excerpt: "Densely planted, native-only micro-forests that grow 10× faster and need zero irrigation after Year 1. Here's the science behind the method we use in every city drive.",
+    category: "Ecology",
+    date: "2026-05-12",
+    read: 6,
+    imageUrl: "/images/blog_miyawaki.jpg",
+  },
+  {
+    slug: "native-species-restoration",
+    title: "Why we plant only native species — and why it matters enormously",
+    excerpt: "Planting fast-growing exotics is tempting. But native forests support 8× more wildlife, need far less water, and actually survive the next drought. The tradeoffs explained.",
+    category: "Biodiversity",
+    date: "2026-04-03",
+    read: 5,
+    imageUrl: "/images/blog_native_forest.jpg",
+  },
+  {
+    slug: "csr-impact-reporting",
+    title: "What good CSR impact reporting actually looks like",
+    excerpt: "Most CSR plantation reports show tree counts. Ours show survival rates, species diversity, carbon sequestered, and community income generated — here's why the difference matters.",
+    category: "CSR",
+    date: "2026-03-18",
+    read: 4,
+    imageUrl: "/images/blog_csr.jpg",
+  },
 ];
 
 export const faqs = [
@@ -121,16 +149,30 @@ export const faqs = [
 ];
 
 export const galleryImages = [
-  { alt: "Volunteers planting saplings at sunrise", hue: 145, span: "row-span-2" },
-  { alt: "Aerial view of a restored forest canopy", hue: 130, span: "" },
-  { alt: "Children carrying seedlings in a nursery", hue: 100, span: "" },
-  { alt: "Tribal community members with saplings", hue: 60, span: "col-span-2" },
-  { alt: "Riverbank cleanup with volunteers", hue: 200, span: "" },
-  { alt: "Miyawaki micro-forest in a Delhi school", hue: 150, span: "row-span-2" },
-  { alt: "Corporate CSR volunteers planting mangroves", hue: 170, span: "" },
-  { alt: "Wildlife returning to a restored patch", hue: 40, span: "" },
-  { alt: "Earth from space, green continents", hue: 220, span: "col-span-2" },
+  { alt: "Volunteers planting a sapling at sunrise", hue: 145, span: "row-span-2", imageUrl: "/images/gallery-01.jpg" },
+  { alt: "A restored forest canopy", hue: 130, span: "", imageUrl: "/images/gallery-02.jpg" },
+  { alt: "Seedlings ready from our nursery", hue: 100, span: "", imageUrl: "/images/gallery-03.jpg" },
+  { alt: "A community planting circle", hue: 60, span: "col-span-2", imageUrl: "/images/gallery-04.jpg" },
+  { alt: "A volunteer at work in the field", hue: 150, span: "", imageUrl: "/images/gallery-05.jpg" },
+  { alt: "Hundreds of volunteers at a single drive", hue: 150, span: "row-span-2", imageUrl: "/images/gallery-06.jpg" },
+  { alt: "Careful hands, one seedling at a time", hue: 170, span: "", imageUrl: "/images/gallery-07.jpg" },
+  { alt: "Every tree starts in someone's hands", hue: 40, span: "", imageUrl: "/images/gallery-08.jpg" },
+  { alt: "A forest restored to stillness", hue: 220, span: "col-span-2", imageUrl: "/images/gallery-09.jpg" },
 ];
+
+// Revealed only when the visitor clicks "View more".
+export const galleryExtraImages = [
+  { alt: "A volunteer planting alone in the field", hue: 155, imageUrl: "/images/gallery-extra-01.jpg" },
+  { alt: "Sunlight through fern leaves", hue: 110, imageUrl: "/images/gallery-extra-02.jpg" },
+  { alt: "Moss-covered forest floor", hue: 135, imageUrl: "/images/gallery-extra-03.jpg" },
+  { alt: "Dappled light through the canopy", hue: 120, imageUrl: "/images/gallery-extra-04.jpg" },
+  { alt: "A seedling's first stages of growth", hue: 95, imageUrl: "/images/gallery-extra-05.jpg" },
+  { alt: "A young sapling catching the evening light", hue: 45, imageUrl: "/images/gallery-extra-06.jpg" },
+  { alt: "A volunteer planting alongside NGO partners", hue: 140, imageUrl: "/images/gallery-extra-07.jpg" },
+  { alt: "Rows of seedlings freshly planted", hue: 105, imageUrl: "/images/gallery-extra-08.jpg" },
+];
+
+export const galleryHero = "/images/gallery-hero.jpg";
 
 export const videos = [
   { title: "Sundarbans: rebuilding the coast", duration: "3:42", hue: 150 },
@@ -145,4 +187,156 @@ export const timeline = [
   { year: "2020", title: "Miyawaki in schools", body: "Launched urban micro-forests in 40 government schools." },
   { year: "2023", title: "Coastal expansion", body: "Began mangrove restoration in the Sundarbans with 8 local co-ops." },
   { year: "2026", title: "1.28M trees & counting", body: "Now working across 14 states with 24,800 active volunteers." },
+];
+
+export interface Drive {
+  slug: string;
+  date: string; // e.g. "Aug 03, 2026" — must stay Date-constructor-parseable
+  city: string;
+  site: string;
+  imageUrl: string;
+  spots: number;
+  filled: number;
+  durationHrs: number;
+  beginnerFriendly: boolean;
+  ecoCertified: boolean;
+  hue: number; // placeholder gradient hue, same convention as galleryImages
+  description: string;
+  thingsToBring: string[];
+  organizer: { name: string; role: string };
+}
+
+export const drives: Drive[] = [
+  {
+    slug: "bengaluru-kaikondrahalli-aug-2026",
+    date: "Aug 03, 2026",
+    city: "Bengaluru",
+    site: "Kaikondrahalli Lake",
+    imageUrl: "/images/drive-bengaluru.jpg",
+    spots: 120,
+    filled: 84,
+    durationHrs: 3,
+    beginnerFriendly: true,
+    ecoCertified: true,
+    hue: 145,
+    description:
+      "We're restoring the native lakeside buffer at Kaikondrahalli with over 40 indigenous species — ficus, neem, and flowering canopy trees that once lined Bengaluru's lake ecosystems before the city paved over them. This drive focuses on the western embankment, where erosion has been steadily eating into the shoreline.",
+    thingsToBring: [
+      "Closed-toe shoes you don't mind getting muddy",
+      "A reusable water bottle",
+      "Sunscreen and a cap",
+      "Gloves (we have spares, but bring your own if you have them)",
+    ],
+    organizer: { name: "Priya Nambiar", role: "Bengaluru City Lead" },
+  },
+  {
+    slug: "delhi-ncr-aravalli-aug-2026",
+    date: "Aug 10, 2026",
+    city: "Delhi NCR",
+    site: "Aravalli Biodiversity Park",
+    imageUrl: "/images/drive-delhi-ncr.jpg",
+    spots: 200,
+    filled: 141,
+    durationHrs: 4,
+    beginnerFriendly: true,
+    ecoCertified: true,
+    hue: 130,
+    description:
+      "The Aravalli Biodiversity Park is one of the last standing ridgeline forests in the NCR. This drive continues our multi-year effort to replace invasive Prosopis juliflora with native Aravalli species — dhak, kair, and khejri — that support the region's dwindling grassland bird populations.",
+    thingsToBring: [
+      "Closed-toe shoes",
+      "A hat and sunglasses — this site has little shade",
+      "Water bottle (refill stations on-site)",
+      "A light jacket if arriving for the early slot",
+    ],
+    organizer: { name: "Arjun Sethi", role: "North India Program Manager" },
+  },
+  {
+    slug: "mumbai-aarey-aug-2026",
+    date: "Aug 17, 2026",
+    city: "Mumbai",
+    site: "Aarey Colony buffer",
+    imageUrl: "/images/drive-mumbai.jpg",
+    spots: 150,
+    filled: 62,
+    durationHrs: 3,
+    beginnerFriendly: true,
+    ecoCertified: true,
+    hue: 150,
+    description:
+      "Aarey's forest buffer has faced years of encroachment pressure. This drive plants a dense native mix — mango, jamun, and mahua — along a 400-metre stretch bordering the Sanjay Gandhi National Park, extending the wildlife corridor that leopards and deer already use to move between forest patches.",
+    thingsToBring: [
+      "Closed-toe shoes (the terrain is uneven and can be wet)",
+      "Mosquito repellent",
+      "Water bottle",
+      "A change of clothes if you're heading elsewhere after",
+    ],
+    organizer: { name: "Meera D'Souza", role: "Western Region Lead" },
+  },
+  {
+    slug: "sundarbans-gosaba-aug-2026",
+    date: "Aug 24, 2026",
+    city: "Sundarbans",
+    site: "Gosaba island",
+    imageUrl: "/images/drive-sundarbans.jpg",
+    spots: 80,
+    filled: 71,
+    durationHrs: 5,
+    beginnerFriendly: false,
+    ecoCertified: true,
+    hue: 200,
+    description:
+      "Gosaba sits on the frontline of the Sundarbans' erosion crisis. We plant mangrove saplings — mostly Sundari and Avicennia — along tidal embankments that protect over a dozen villages from storm surge. This is a physically demanding, boat-access-only drive; not recommended as your first plantation event.",
+    thingsToBring: [
+      "Quick-dry clothing — you will be wading in tidal mud",
+      "Sandals with ankle straps (no loose flip-flops)",
+      "Sun protection — there is no shade on the embankments",
+      "A dry bag for your phone and valuables",
+    ],
+    organizer: { name: "Sourav Biswas", role: "Coastal Program Lead" },
+  },
+  {
+    slug: "almora-panuwanaula-sep-2026",
+    date: "Sep 07, 2026",
+    city: "Almora",
+    site: "Panuwanaula ridge",
+    imageUrl: "/images/drive-almora.jpg",
+    spots: 60,
+    filled: 22,
+    durationHrs: 4,
+    beginnerFriendly: false,
+    ecoCertified: true,
+    hue: 60,
+    description:
+      "This ridge lost significant oak cover to landslides in the 2023 monsoon. Working alongside women from the local nursery cooperative, we're replanting banj oak and rhododendron on a 30-degree slope — slower, steeper work than our urban drives, but some of our highest long-term survival rates.",
+    thingsToBring: [
+      "Sturdy trekking shoes with ankle support",
+      "Layered clothing — hill mornings are cold, afternoons are not",
+      "A walking stick if you have one",
+      "Personal medication; the nearest clinic is 40 minutes away",
+    ],
+    organizer: { name: "Kamal Bhatt", role: "Almora Community Partner" },
+  },
+  {
+    slug: "chennai-pallikaranai-sep-2026",
+    date: "Sep 14, 2026",
+    city: "Chennai",
+    site: "Pallikaranai marsh",
+    imageUrl: "/images/drive-chennai.jpg",
+    spots: 130,
+    filled: 45,
+    durationHrs: 3,
+    beginnerFriendly: true,
+    ecoCertified: true,
+    hue: 170,
+    description:
+      "Pallikaranai is one of India's last surviving natural marshlands and a critical flood buffer for South Chennai. This drive plants native wetland-edge species that stabilize the marsh boundary and provide habitat for the migratory birds that winter here every year.",
+    thingsToBring: [
+      "Closed-toe shoes you're okay getting wet",
+      "Water bottle",
+      "Insect repellent",
+      "Binoculars if you'd like to bird-watch afterward",
+    ],
+    organizer: { name: "Divya Raghunathan", role: "South India Program Lead" },
+  },
 ];
