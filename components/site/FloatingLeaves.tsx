@@ -19,7 +19,6 @@ const VARIANTS: Record<string, Variant> = {
   "/gallery":           { icons: [Flower2, Leaf, Sparkles],     colors: ["text-leaf","text-gold"],                count: 4, size: [18, 28], duration: [34, 48], opacity: 0.35 },
   "/videos":            { icons: [Cloud, Leaf, Sparkles],       colors: ["text-leaf","text-gold"],                count: 3, size: [18, 28], duration: [38, 52], opacity: 0.3 },
   "/testimonials":      { icons: [Feather, Leaf, Sparkles],     colors: ["text-leaf","text-gold"],                count: 3, size: [18, 26], duration: [38, 52], opacity: 0.3 },
-  "/blogs":             { icons: [Feather, Leaf, Sprout],       colors: ["text-emerald","text-leaf"],             count: 3, size: [18, 26], duration: [38, 52], opacity: 0.3 },
   "/faq":               { icons: [Leaf, Sprout],                colors: ["text-emerald","text-leaf"],             count: 3, size: [16, 24], duration: [40, 54], opacity: 0.25 },
   "/contact":           { icons: [Bird, Leaf, Feather],         colors: ["text-leaf","text-emerald"],             count: 4, size: [18, 28], duration: [36, 48], opacity: 0.3 },
   "/privacy":           { icons: [Leaf],                        colors: ["text-emerald"],                         count: 2, size: [16, 22], duration: [42, 56], opacity: 0.2 },
