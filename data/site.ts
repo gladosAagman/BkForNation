@@ -109,6 +109,36 @@ export const testimonials = [
   { name: "Kamal Bhatt", role: "Sarpanch, Almora", quote: "They didn't parachute in. They listened, hired locally, and left our slopes greener than they found them." },
 ];
 
+export const blogs = [
+  {
+    slug: "miyawaki-method-india",
+    title: "Why the Miyawaki method is India's best bet for urban forests",
+    excerpt: "Densely planted, native-only micro-forests that grow 10× faster and need zero irrigation after Year 1. Here's the science behind the method we use in every city drive.",
+    category: "Ecology",
+    date: "2026-05-12",
+    read: 6,
+    imageUrl: "/images/blog_miyawaki.jpg",
+  },
+  {
+    slug: "native-species-restoration",
+    title: "Why we plant only native species — and why it matters enormously",
+    excerpt: "Planting fast-growing exotics is tempting. But native forests support 8× more wildlife, need far less water, and actually survive the next drought. The tradeoffs explained.",
+    category: "Biodiversity",
+    date: "2026-04-03",
+    read: 5,
+    imageUrl: "/images/blog_native_forest.jpg",
+  },
+  {
+    slug: "csr-impact-reporting",
+    title: "What good CSR impact reporting actually looks like",
+    excerpt: "Most CSR plantation reports show tree counts. Ours show survival rates, species diversity, carbon sequestered, and community income generated — here's why the difference matters.",
+    category: "CSR",
+    date: "2026-03-18",
+    read: 4,
+    imageUrl: "/images/blog_csr.jpg",
+  },
+];
+
 export const faqs = [
   { q: "How do I know my donation actually plants a tree?", a: "Every donation is tied to a geo-tagged plot. You receive a certificate with GPS coordinates, species list, and photos at 3, 12, and 36 months." },
   { q: "Is my donation tax-deductible?", a: "Yes. BKforNation is registered under 80G and 12A of the Indian Income Tax Act. Your receipt is emailed within 48 hours." },

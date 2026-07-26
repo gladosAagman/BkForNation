@@ -44,10 +44,7 @@ export default function CampaignsPage() {
           </Reveal>
         </div>
 
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/40 text-xs font-medium animate-bounce">
-          <div className="h-8 w-px bg-white/30" />
-          Scroll
-        </div>
+
       </section>
 
       {/* ── Campaign Cards Grid ──────────────────────────── */}

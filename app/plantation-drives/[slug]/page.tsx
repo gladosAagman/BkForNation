@@ -10,15 +10,16 @@ import { drives } from "@/data/site";
 import { ReserveForm } from "./ReserveForm";
 
 interface PageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export function generateStaticParams() {
   return drives.map((d) => ({ slug: d.slug }));
 }
 
-export function generateMetadata({ params }: PageProps): Metadata {
-  const drive = drives.find((d) => d.slug === params.slug);
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const drive = drives.find((d) => d.slug === slug);
   if (!drive) return { title: "Drive not found — BKforNation" };
   return {
     title: `${drive.city} Plantation Drive — BKforNation`,
@@ -39,8 +40,9 @@ function isWeekend(dateStr: string) {
   return day === 0 || day === 6;
 }
 
-export default function DriveDetailsPage({ params }: PageProps) {
-  const drive = drives.find((d) => d.slug === params.slug);
+export default async function DriveDetailsPage({ params }: PageProps) {
+  const { slug } = await params;
+  const drive = drives.find((d) => d.slug === slug);
   if (!drive) notFound();
 
   const pct = Math.round((drive.filled / drive.spots) * 100);

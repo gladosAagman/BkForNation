@@ -3,7 +3,7 @@ import { ArrowRight, Sprout, HeartHandshake, Leaf, TreePine, Users, Globe2, Tren
 import { Reveal } from "@/components/site/Reveal";
 import { Counter } from "@/components/site/Counter";
 import { TiltCard } from "@/components/site/TiltCard";
-import { brand, impactStats, campaigns, whyTrees, donationTiers, testimonials, blogs, galleryImages, media } from "@/data/site";
+import { brand, impactStats, campaigns, whyTrees, donationTiers, testimonials, galleryImages, media } from "@/data/site";
 
 export default function Home() {
   return (
@@ -346,88 +346,6 @@ export default function Home() {
                         {captions[i]}
                       </div>
                     </div>
-                  </Reveal>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-0 relative overflow-hidden bg-[#f8faf9]">
-        {/* Header */}
-        <div className="container-nice pt-16 pb-10">
-          <Reveal className="flex items-end justify-between flex-wrap gap-4">
-            <div>
-              <div className="inline-flex items-center gap-2 rounded-full bg-emerald/10 text-emerald px-3 py-1.5 text-xs font-semibold uppercase tracking-widest mb-5 border border-emerald/20">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald animate-pulse" />
-                Journal
-              </div>
-              <h2 className="font-display text-5xl md:text-6xl font-bold tracking-tight text-forest leading-tight">
-                Field notes
-                <span className="block italic font-medium text-emerald">& essays.</span>
-              </h2>
-            </div>
-            <Link href="/blogs" className="inline-flex items-center gap-2 rounded-full bg-white hover:bg-emerald hover:text-white border border-border/50 text-forest shadow-soft px-6 py-3 text-sm font-bold transition-all duration-300">
-              All posts <ArrowRight className="h-4 w-4" />
-            </Link>
-          </Reveal>
-        </div>
-
-        {/* Editorial grid */}
-        <div className="container-nice pb-16">
-          <div className="flex flex-col md:flex-row gap-4 h-auto md:h-[440px]">
-            {/* Big featured article */}
-            <div className="w-full md:w-3/5 h-[320px] md:h-full">
-              {(() => {
-                const b = blogs[0];
-                return (
-                  <Reveal key={b.slug} delay={0} className="h-full">
-                    <Link href={`/blogs/${b.slug}`} className="relative h-full rounded-3xl overflow-hidden group block">
-                      <img src="/images/blog_miyawaki.jpg" alt={b.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10" />
-                      <div className="absolute inset-0 bg-emerald/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                      <div className="absolute top-5 left-5 z-10">
-                        <span className="rounded-full bg-leaf text-forest px-3 py-1 text-xs font-bold">{b.category}</span>
-                      </div>
-                      <div className="absolute bottom-0 left-0 right-0 p-8 z-10">
-                        <div className="text-white/70 text-xs mb-3">{new Date(b.date).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" })} · {b.read} min read</div>
-                        <h3 className="font-display text-2xl md:text-3xl font-bold text-white leading-snug text-balance">{b.title}</h3>
-                        <p className="mt-3 text-white/70 text-sm leading-relaxed line-clamp-2">{b.excerpt}</p>
-                        <div className="mt-5 inline-flex items-center gap-2 text-leaf text-sm font-bold group-hover:gap-3 transition-all">
-                          Read essay <ArrowRight className="h-4 w-4" />
-                        </div>
-                      </div>
-                    </Link>
-                  </Reveal>
-                );
-              })()}
-            </div>
-
-            {/* Stacked smaller articles */}
-            <div className="w-full md:w-2/5 flex flex-col gap-4 h-full">
-              {blogs.slice(1, 3).map((b, i) => {
-                const realBlogImages = [
-                  "/images/blog_native_forest.jpg",
-                  "/images/blog_csr.jpg"
-                ];
-                return (
-                  <Reveal key={b.slug} delay={(i + 1) * 100} className="flex-1">
-                    <Link href={`/blogs/${b.slug}`} className="relative h-full rounded-3xl overflow-hidden group block">
-                      <img src={realBlogImages[i]} alt={b.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/10" />
-                      <div className="absolute inset-0 bg-emerald/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                      <div className="absolute top-4 left-4 z-10">
-                        <span className="rounded-full bg-white/20 backdrop-blur text-white px-3 py-1 text-xs font-bold border border-white/20">{b.category}</span>
-                      </div>
-                      <div className="absolute bottom-0 left-0 right-0 p-5 z-10">
-                        <div className="text-white/70 text-xs mb-1.5">{new Date(b.date).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })} · {b.read} min read</div>
-                        <h3 className="font-display text-base font-bold text-white leading-snug">{b.title}</h3>
-                        <div className="mt-2 inline-flex items-center gap-1.5 text-leaf text-xs font-bold group-hover:gap-2 transition-all">
-                          Read essay <ArrowRight className="h-3 w-3" />
-                        </div>
-                      </div>
-                    </Link>
                   </Reveal>
                 );
               })}
