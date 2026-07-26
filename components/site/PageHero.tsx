@@ -17,7 +17,7 @@ export function PageHero({ eyebrow, title, subtitle, children, backgroundImage }
     <section
       className={
         hasPhoto
-          ? "relative min-h-[100svh] flex items-center overflow-hidden pt-24"
+          ? "relative min-h-[100svh] flex items-center overflow-hidden pt-24 pb-16"
           : "relative pt-36 pb-16 md:pt-44 md:pb-24 overflow-hidden"
       }
     >
@@ -43,7 +43,7 @@ export function PageHero({ eyebrow, title, subtitle, children, backgroundImage }
             <div
               className={
                 hasPhoto
-                  ? "inline-flex items-center gap-2 rounded-full bg-white/15 border border-white/25 backdrop-blur-sm px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white"
+                  ? "inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur border border-white/25 text-leaf px-4 py-1.5 text-xs font-semibold uppercase tracking-widest shadow-soft"
                   : "inline-flex items-center gap-2 rounded-full bg-accent/70 border border-border/60 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-forest"
               }
             >
@@ -54,14 +54,14 @@ export function PageHero({ eyebrow, title, subtitle, children, backgroundImage }
           <h1
             className={
               hasPhoto
-                ? "mt-5 font-display text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white text-balance"
+                ? "mt-5 font-display text-5xl md:text-7xl font-bold text-white leading-[1.05] tracking-tight drop-shadow-xl"
                 : "mt-5 font-display text-4xl md:text-6xl font-bold tracking-tight text-forest text-balance"
             }
           >
             {title}
           </h1>
           {subtitle && (
-            <p className={hasPhoto ? "mt-5 text-lg md:text-xl text-white/90 max-w-2xl text-balance" : "mt-5 text-lg md:text-xl text-muted-foreground max-w-2xl text-balance"}>
+            <p className={hasPhoto ? "mt-6 text-white/90 text-lg md:text-xl max-w-2xl leading-relaxed drop-shadow-md" : "mt-5 text-lg md:text-xl text-muted-foreground max-w-2xl text-balance"}>
               {subtitle}
             </p>
           )}
