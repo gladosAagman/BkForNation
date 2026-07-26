@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 
 interface TiltCardProps extends HTMLMotionProps<"div"> {
   children: React.ReactNode;
+  className?: string;
 }
 
 export const TiltCard = ({ children, className, ...props }: TiltCardProps) => {

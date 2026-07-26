@@ -1,7 +1,8 @@
+// TARGET PATH: app/donate/DonateClient.tsx  (full replacement)
 "use client";
 import { useState } from "react";
+import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
-import { TiltCard } from "@/components/site/TiltCard";
 import { donationTiers } from "@/data/site";
 import { HeartHandshake, ShieldCheck, ReceiptText, TreePine } from "lucide-react";
 
@@ -11,81 +12,48 @@ export default function DonateClient() {
 
   return (
     <>
-      {/* ── Cinematic Hero ───────────────────────────────── */}
-      <section className="relative min-h-[75vh] flex items-end overflow-hidden">
-        {/* Background image & overlays */}
-        <div className="absolute inset-0 z-0">
-          <img
-            src="/images/donate_hero.jpg"
-            alt="Close up of hands planting a tree seedling"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-forest/40 mix-blend-multiply" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#f8faf9] via-forest/50 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-b from-forest/30 to-transparent" />
-        </div>
-
-        <div className="container-nice relative z-10 pb-20 md:pb-28">
-          <Reveal>
-            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur border border-white/25 text-leaf px-4 py-1.5 text-xs font-semibold uppercase tracking-widest mb-6 shadow-soft">
-              <span className="h-1.5 w-1.5 rounded-full bg-leaf animate-pulse" />
-              Donate
-            </div>
-            <h1 className="font-display text-5xl md:text-7xl font-bold text-white leading-[1.05] tracking-tight drop-shadow-xl">
-              Turn a tab into <br className="hidden md:block" />
-              <span className="text-leaf italic font-medium">a tree.</span>
-            </h1>
-            <p className="mt-6 text-white/90 text-lg md:text-xl max-w-2xl leading-relaxed drop-shadow-md">
-              80G tax-deductible. Geo-tagged plot per donation. Photo & GPS certificate emailed directly to you within 48 hours.
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ── Donation Form & Info ──────────────────────────── */}
-      <section className="pb-24 pt-12 bg-[#f8faf9] relative z-20 -mt-10">
+      <PageHero
+        eyebrow="Donate"
+        title="Turn a tab into a tree."
+        subtitle="80G tax-deductible. Geo-tagged plot per donation. Photo & GPS certificate emailed within 48 hours."
+        backgroundImage="/images/donate_hero.jpg"
+      />
+      {/* Same -mt-8 overlap rhythm as Home / Drives / Impact / Gallery / Contact. */}
+      <section className="relative -mt-8 z-10 pb-24">
         <div className="container-nice grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-6">
             <Reveal>
-              <div className="rounded-[2.5rem] bg-white border border-border/50 p-8 md:p-12 shadow-soft hover:shadow-glow hover:border-emerald/30 transition-all duration-500">
-                <h2 className="font-display text-3xl font-bold text-forest">Choose an amount</h2>
-                <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="rounded-3xl bg-card border border-border p-8 shadow-glow">
+                <h2 className="font-display text-2xl font-bold text-forest">Choose an amount</h2>
+                <div className="mt-5 grid grid-cols-2 md:grid-cols-4 gap-3">
                   {donationTiers.map((d) => (
                     <button
                       key={d.amount}
                       onClick={() => { setAmount(d.amount); setCustom(""); }}
-                      className={`rounded-2xl border-2 p-5 text-left transition-all duration-300 ${
-                        amount === d.amount && !custom 
-                          ? "border-emerald bg-emerald/5 shadow-glow scale-[1.02]" 
-                          : "border-border/60 bg-white hover:border-emerald/40 hover:bg-emerald/5 hover:scale-[1.02]"
-                      }`}
+                      className={`rounded-2xl border p-4 text-left transition-all ${amount === d.amount && !custom ? "border-forest bg-accent/60 ring-2 ring-forest/30" : "border-border bg-background hover:border-forest/40"}`}
                     >
                       <div className="font-display text-2xl font-bold text-forest">₹{d.amount}</div>
-                      <div className="mt-1 text-sm font-semibold text-muted-foreground uppercase tracking-wider">{d.trees} trees</div>
+                      <div className="mt-1 text-xs text-muted-foreground">{d.trees} trees</div>
                     </button>
                   ))}
                 </div>
-                
-                <div className="mt-6">
+                <div className="mt-4">
                   <label className="block">
-                    <span className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-2 block">Or a custom amount (₹)</span>
+                    <span className="text-sm font-medium">Or a custom amount (₹)</span>
                     <input
                       type="number"
                       value={custom}
                       onChange={(e) => { setCustom(e.target.value); setAmount(Number(e.target.value) || 0); }}
                       placeholder="5000"
-                      className="w-full rounded-2xl border-2 border-border/60 bg-white px-5 py-4 text-xl font-display font-bold focus:outline-none focus:border-emerald focus:ring-4 focus:ring-emerald/10 transition-all"
+                      className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-lg font-display font-bold focus:outline-none focus:ring-2 focus:ring-ring"
                     />
                   </label>
                 </div>
-
-                <div className="mt-8 rounded-3xl bg-[#f8faf9] border border-border/60 p-6 flex items-start gap-5">
-                  <div className="h-12 w-12 rounded-2xl bg-emerald/10 flex items-center justify-center shrink-0">
-                    <TreePine className="h-6 w-6 text-emerald" />
-                  </div>
+                <div className="mt-6 rounded-2xl bg-accent/40 p-5 flex items-start gap-4">
+                  <TreePine className="h-8 w-8 text-forest shrink-0" />
                   <div>
-                    <div className="font-display font-bold text-xl text-forest">Your impact</div>
-                    <p className="text-muted-foreground mt-2 leading-relaxed">
+                    <div className="font-semibold text-forest">Your impact</div>
+                    <p className="text-sm text-muted-foreground mt-1">
                       ₹{amount.toLocaleString("en-IN")} plants approximately{" "}
                       <span className="font-bold text-forest">{Math.max(1, Math.round(amount / 40))} native trees</span> and offsets{" "}
                       <span className="font-bold text-forest">{(amount * 0.02).toFixed(1)} tons of CO₂</span> over their lifetime.
@@ -96,48 +64,42 @@ export default function DonateClient() {
             </Reveal>
 
             <Reveal delay={100}>
-              <form onSubmit={(e) => e.preventDefault()} className="rounded-[2.5rem] bg-white border border-border/50 p-8 md:p-12 shadow-soft hover:shadow-glow hover:border-emerald/30 transition-all duration-500">
-                <h2 className="font-display text-3xl font-bold text-forest">Your details</h2>
-                <div className="mt-8 grid md:grid-cols-2 gap-6">
+              <form onSubmit={(e) => e.preventDefault()} className="rounded-3xl bg-card border border-border p-8 shadow-glow">
+                <h2 className="font-display text-2xl font-bold text-forest">Your details</h2>
+                <div className="mt-5 grid md:grid-cols-2 gap-4">
                   {[
-                    { l: "Full name", t: "text", p: "Arjun Kumar" },
-                    { l: "Email for receipt", t: "email", p: "arjun@example.com" },
-                    { l: "Phone", t: "tel", p: "+91 98765 43210" },
-                    { l: "PAN (for 80G)", t: "text", p: "ABCDE1234F" },
+                    { l: "Full name", t: "text" },
+                    { l: "Email for receipt", t: "email" },
+                    { l: "Phone", t: "tel" },
+                    { l: "PAN (for 80G)", t: "text" },
                   ].map((f) => (
                     <label key={f.l} className="block">
-                      <span className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-2 block">{f.l}</span>
-                      <input 
-                        type={f.t} 
-                        placeholder={f.p}
-                        required 
-                        className="w-full rounded-2xl border-2 border-border/60 bg-[#f8faf9] px-5 py-3.5 text-base focus:outline-none focus:border-emerald focus:ring-4 focus:ring-emerald/10 transition-all focus:bg-white" 
-                      />
+                      <span className="text-sm font-medium">{f.l}</span>
+                      <input type={f.t} required className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
                     </label>
                   ))}
                 </div>
-                <button className="mt-8 w-full group flex items-center justify-center gap-2 rounded-full bg-forest text-white px-8 py-4 text-lg font-bold shadow-soft hover:shadow-glow hover:bg-emerald transition-all duration-300">
-                  <HeartHandshake className="h-5 w-5 group-hover:-translate-y-1 transition-transform" /> 
-                  Donate ₹{amount.toLocaleString("en-IN")}
+                <button className="mt-6 magnetic inline-flex items-center gap-2 rounded-full bg-hero text-white px-8 py-3.5 text-sm font-bold">
+                  <HeartHandshake className="h-4 w-4" /> Donate ₹{amount.toLocaleString("en-IN")}
                 </button>
               </form>
             </Reveal>
           </div>
 
-          <div className="space-y-6">
+          <div className="space-y-4">
             {[
-              { Icon: ShieldCheck, k: "80G tax benefit", v: "Registered under 80G & 12A. Save up to 50% in taxes on your donation." },
-              { Icon: ReceiptText, k: "Instant receipt", v: "Your certificate and official tax receipt are emailed to you within 48 hours." },
-              { Icon: TreePine, k: "Geo-tagged plots", v: "Every single donation is tied to a real, monitored plot of land." },
+              { Icon: ShieldCheck, k: "80G tax benefit", v: "Registered under 80G & 12A. Save up to 50% in taxes." },
+              { Icon: ReceiptText, k: "Instant receipt", v: "Certificate + tax receipt emailed within 48 hours." },
+              { Icon: TreePine, k: "Geo-tagged", v: "Every donation ties to a real, monitored plot." },
             ].map((b, i) => (
               <Reveal key={b.k} delay={i * 80}>
-                <TiltCard className="rounded-3xl bg-white border border-border/50 p-8 shadow-soft hover:shadow-glow hover:border-emerald/30 transition-all duration-500">
-                  <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-leaf to-emerald grid place-items-center text-white shadow-glow mb-6">
-                    <b.Icon className="h-7 w-7" />
+                <div className="rounded-2xl bg-card border border-border p-6 shadow-soft">
+                  <div className="h-10 w-10 rounded-xl bg-leaf-gradient grid place-items-center text-forest">
+                    <b.Icon className="h-5 w-5" />
                   </div>
-                  <div className="font-display text-xl font-bold text-forest">{b.k}</div>
-                  <p className="mt-3 text-muted-foreground leading-relaxed">{b.v}</p>
-                </TiltCard>
+                  <div className="mt-4 font-display font-bold text-forest">{b.k}</div>
+                  <p className="mt-1 text-sm text-muted-foreground">{b.v}</p>
+                </div>
               </Reveal>
             ))}
           </div>
