@@ -18,11 +18,11 @@ export const brand = {
 
 export const media = {
   hero: "/images/hero-forest.jpg",
-  beforeSlope: "/images/before-slope.jpg",
-  afterForest: "/images/after-forest.jpg",
+  beforeSlope: "/images/almora_before.jpg",
+  afterForest: "/images/almora_after.jpg",
   campaignImages: {
-    "million-mangroves": "/images/campaign-mangrove.jpg",
-    "himalayan-canopy": "/images/campaign-himalaya.jpg",
+    "million-mangroves": "/images/campaign_mangroves.jpg",
+    "himalayan-canopy": "/images/campaign_himalayan.jpg",
     "urban-lungs": "/images/campaign-urban.jpg",
     "river-revive": "/images/campaign-river.jpg",
   } as Record<string, string>,
