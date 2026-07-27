@@ -14,21 +14,25 @@ export const metadata: Metadata = {
 export default function CampaignsPage() {
   return (
     <>
-      {/* ── Cinematic Hero ───────────────────────────────── */}
-      <section className="relative min-h-[88vh] flex items-end overflow-hidden">
-        {/* Background image & overlays */}
-        <div className="absolute inset-0 z-0">
-          <img
-            src="/images/campaigns_hero.jpg"
-            alt="Aerial view of Indian coastal mangrove restoration"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-forest/40 mix-blend-multiply" />
-          <div className="absolute inset-0 bg-gradient-to-t from-forest via-forest/50 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-b from-forest/30 to-transparent" />
-        </div>
+      {/* ── Hero — matches Home's exact treatment ── */}
+      <section className="relative min-h-[100svh] flex items-center overflow-hidden pt-24">
+        <img
+          src="/images/campaigns_hero.jpg"
+          alt=""
+          aria-hidden
+          className="absolute inset-0 -z-20 h-full w-full object-cover"
+        />
+        <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-br from-forest/90 via-forest/70 to-emerald/50" />
+        <div
+          aria-hidden
+          className="absolute inset-0 -z-10 opacity-60"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 15% 20%, oklch(0.85 0.18 130 / 0.35), transparent 45%), radial-gradient(circle at 85% 70%, oklch(0.55 0.15 160 / 0.5), transparent 50%)",
+          }}
+        />
 
-        <div className="container-nice relative z-10 pb-20 md:pb-28">
+        <div className="container-nice relative z-10">
           <Reveal>
             <div className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur border border-white/25 text-leaf px-4 py-1.5 text-xs font-semibold uppercase tracking-widest mb-6 shadow-soft">
               <span className="h-1.5 w-1.5 rounded-full bg-leaf animate-pulse" />
@@ -44,7 +48,7 @@ export default function CampaignsPage() {
           </Reveal>
         </div>
 
-
+        <div aria-hidden className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-background" />
       </section>
 
       {/* ── Campaign Cards Grid ──────────────────────────── */}

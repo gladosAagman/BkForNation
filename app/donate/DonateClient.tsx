@@ -11,21 +11,21 @@ export default function DonateClient() {
 
   return (
     <>
-      {/* ── Cinematic Hero ───────────────────────────────── */}
-      <section className="relative min-h-[75vh] flex items-end overflow-hidden">
-        {/* Background image & overlays */}
-        <div className="absolute inset-0 z-0">
-          <img
-            src="/images/donate_hero.jpg"
-            alt="Close up of hands planting a tree seedling"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-forest/40 mix-blend-multiply" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#f8faf9] via-forest/50 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-b from-forest/30 to-transparent" />
-        </div>
+      {/* ── Hero — matches Home's exact treatment ── */}
+      <section className="relative min-h-[100svh] flex items-center overflow-hidden pt-24 pb-16">
+        <img
+          src="/images/donate_hero.jpg"
+          alt=""
+          aria-hidden
+          className="absolute inset-0 -z-20 h-full w-full object-cover"
+        />
+        {/* Same bg-hero + black-fade formula as PageHero (Drives/Impact/
+            Gallery/Contact), so every hero on the site uses one identical
+            treatment instead of two similar-but-different ones. */}
+        <div aria-hidden className="absolute inset-0 -z-10 bg-hero opacity-75" />
+        <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-black/35 via-transparent to-black/10" />
 
-        <div className="container-nice relative z-10 pb-20 md:pb-28">
+        <div className="container-nice relative z-10">
           <Reveal>
             <div className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur border border-white/25 text-leaf px-4 py-1.5 text-xs font-semibold uppercase tracking-widest mb-6 shadow-soft">
               <span className="h-1.5 w-1.5 rounded-full bg-leaf animate-pulse" />
@@ -40,10 +40,16 @@ export default function DonateClient() {
             </p>
           </Reveal>
         </div>
+
+      <div
+  aria-hidden
+  className="pointer-events-none absolute inset-x-0 bottom-0 h-40
+             bg-gradient-to-b from-transparent via-background/30 to-background"
+/>
       </section>
 
       {/* ── Donation Form & Info ──────────────────────────── */}
-      <section className="pb-24 pt-12 bg-[#f8faf9] relative z-20 -mt-10">
+      <section className="relative -mt-8 z-10 pb-24">
         <div className="container-nice grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-6">
             <Reveal>
